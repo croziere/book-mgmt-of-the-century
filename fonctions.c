@@ -10,6 +10,7 @@ Lecteur * lireLecteur (FILE *fe)
 		exit(1);
 	}
 	fscanf(fe, "%d %s %s %s", &l->num, l->nom, l->prenom, l->adresse);
+	l->emps = NULL;
 	return l;
 }
 
@@ -87,10 +88,10 @@ int chargeLecteurs(Lecteur * t[], int nbmax, char * nom)
 	return i;
 }
 
-int chargeEmprunts(Emprunts * t[], int nbmax, char * nom)
+int chargeEmprunts (Lecteur * t[], int nb, char * nom)
 {
 	FILE *fe;
-	int i = 0;
+	int pos;
 	Emprunts *emprunt;
 	
 	fe = fopen(nom, "r");
@@ -99,17 +100,34 @@ int chargeEmprunts(Emprunts * t[], int nbmax, char * nom)
 	
 	emprunt = lireEmprunt(fe);
 	
+/*#magie*/ 
+
 	while(feof(fe) == 0)
 	{
-		if(i == nbmax)
-			return -2;
-		t[i] = emprunt;
+		pos = rechercheLecteur(emprunt->numlec, t, nb);
+		if ( pos < 0) 
+			printf("l'utilisateur %d n'existe pas!", emprunt->numlec);
+		else 
+			insertionEmprunt(t[pos]->emps, *emprunt);
+
 		emprunt = lireEmprunt(fe);
-		i++;
 	}
 	
-	return i;
+	return 0;
 }
+
+int rechercheLecteur (int numrech, Lecteur *t[], int nb) //tableau pas trié, peut etre quil faut le trier
+{
+	int i; 
+	for (i=0; i<nb; i++)
+	{	
+		if ( numrech == t[i]->num) 
+			return i;
+	}
+	return -1;
+}
+
+
 
 Liste insertionEnTete(Liste l, Emprunts e)
 {
