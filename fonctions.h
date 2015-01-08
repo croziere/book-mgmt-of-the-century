@@ -12,7 +12,7 @@ typedef struct {
 }Emprunts;
 
 typedef struct maillon {
-	Emprunts a;
+	Emprunts e;
 	struct maillon *suivant;
 }Maillon, *Liste;
 

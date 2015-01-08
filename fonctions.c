@@ -111,10 +111,10 @@ int chargeEmprunts(Emprunts * t[], int nbmax, char * nom)
 	return i;
 }
 
-Liste insertionEnTete(Liste l, Emprunt e)
+Liste insertionEnTete(Liste l, Emprunts e)
 {
 	Maillon *x;
-	x=(Maillon*)malloc (sizeof(Maillon));
+	x=(Maillon*)malloc(sizeof(Maillon));
 	x->e=e;
 	x->suivant=l;
 	return x;
