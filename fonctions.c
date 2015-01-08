@@ -160,7 +160,7 @@ Liste insertionEmprunt (Liste l, Emprunts e)
 
 void test(void)
 {
-	Date d1 = {01, 09, 1996}, d2 = {01, 06, 1996};
+	Date d1 = {1, 9, 1996}, d2 = {1, 6, 1996};
 	Ouvrage * touvr[100];
 	Lecteur * tlec[100];
 	Emprunts * temp[100];
