@@ -33,7 +33,7 @@ typedef struct {
 	char nom[TAILLECH];
 	char prenom[TAILLECH];
 	char adresse[TLONGCH];
-	Emprunts ** emps;
+	Liste emps;
 }Lecteur;
 
 

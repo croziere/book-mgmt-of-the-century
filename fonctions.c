@@ -124,7 +124,7 @@ int compareDate(Date d1, Date d2)
 {
 	if (d1.annee > d2.annee)
 		return 1;
-	else if (d1.annee < d2.anee)
+	else if (d1.annee < d2.annee)
 		return -1;
 	else
 	{ 
@@ -160,7 +160,7 @@ Liste insertionEmprunt (Liste l, Emprunts e)
 
 void test(void)
 {
-	Date d1 = {01, 09, 1996}, d2 = { 01,06,1996};
+	Date d1 = {01, 09, 1996}, d2 = {01, 06, 1996};
 	Ouvrage * touvr[100];
 	Lecteur * tlec[100];
 	Emprunts * temp[100];
