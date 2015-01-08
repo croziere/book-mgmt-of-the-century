@@ -14,7 +14,9 @@ typedef struct {
 typedef struct maillon {
 	Emprunts e;
 	struct maillon *suivant;
-}Maillon, *Liste;
+}Maillon;
+
+typedef Maillon *Liste;
 
 typedef struct {
 	int jour;
