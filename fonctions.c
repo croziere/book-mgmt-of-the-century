@@ -111,7 +111,7 @@ int chargeEmprunts(Emprunts * t[], int nbmax, char * nom)
 	return i;
 }
 
-Maillon * insertionEnTete(Maillon *l, Emprunts e)
+Liste insertionEnTete(Liste l, Emprunts e)
 {
 	Maillon *x;
 	x=(Maillon*)malloc(sizeof(Maillon));

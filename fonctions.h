@@ -14,9 +14,7 @@ typedef struct {
 typedef struct maillon {
 	Emprunts e;
 	struct maillon *suivant;
-}Maillon;
-
-typedef Maillon *Liste;
+}Maillon, *Liste;
 
 typedef struct {
 	int jour;
@@ -37,3 +35,15 @@ typedef struct {
 	char adresse[TLONGCH];
 	Emprunts ** emps;
 }Lecteur;
+
+
+Lecteur * lireLecteur (FILE *fe);
+Emprunts * lireEmprunt (FILE *fe);
+Ouvrage * lireOuvrage(FILE *fe);
+int chargeOuvrages(Ouvrage * t[], int nbmax, char * nom);
+int chargeLecteurs(Lecteur * t[], int nbmax, char * nom);
+int chargeEmprunts(Emprunts * t[], int nbmax, char * nom);
+Liste insertionEnTete(Liste l, Emprunts e);
+int compareDate(Date d1, Date d2);
+
+void test(void);
