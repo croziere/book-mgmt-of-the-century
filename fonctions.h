@@ -5,6 +5,12 @@
 #define TLONGCH 100
 
 typedef struct {
+	int jour;
+	int mois;
+	int annee;
+}Date;
+
+typedef struct {
 	int numlec;
 	int cote;
 	Date demprunt;
@@ -15,12 +21,6 @@ typedef struct maillon {
 	Emprunts e;
 	struct maillon *suivant;
 }Maillon, *Liste;
-
-typedef struct {
-	int jour;
-	int mois;
-	int annee;
-}Date;
 
 typedef struct {
 	int cote;

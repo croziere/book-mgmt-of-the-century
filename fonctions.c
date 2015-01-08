@@ -144,6 +144,20 @@ int compareDate(Date d1, Date d2)
 	}
 }
 
+Liste insertionEmprunt (Liste l, Emprunts e) 
+{
+	if (l == NULL) 
+		return insertionEnTete(l, e); 
+	if (compareDate(l->e.demprunt, e.demprunt) > 0)
+		return insertionEnTete(l, e);
+	l->suivant = insertionEmprunt(l->suivant, e);
+	return l;
+}
+
+
+
+
+
 void test(void)
 {
 	Date d1 = {01, 09, 1996}, d2 = { 01,06,1996};
