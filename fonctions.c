@@ -111,8 +111,42 @@ int chargeEmprunts(Emprunts * t[], int nbmax, char * nom)
 	return i;
 }
 
+Liste insertionEnTete(Liste l, Emprunt e)
+{
+	Maillon *x;
+	x=(Maillon*)malloc (sizeof(Maillon));
+	x->e=e;
+	x->suivant=l;
+	return x;
+}
+
+int compareDate(Date d1, Date d2)
+{
+	if (d1.annee > d2.annee)
+		return 1;
+	else if (d1.annee < d2.anee)
+		return -1;
+	else
+	{ 
+		if (d1.mois > d2.mois)
+			return 1; 
+		else if (d1.mois < d2.mois) 
+			return -1;
+		else 
+		{
+			if (d1.jour > d2.jour)
+				return -1;
+			else if (d1.jour < d2.jour)
+				return 1;
+			else 
+				return 0;
+		}
+	}
+}
+
 void test(void)
 {
+	Date d1 = {01, 09, 1996}, d2 = { 01,06,1996};
 	Ouvrage * touvr[100];
 	Lecteur * tlec[100];
 	Emprunts * temp[100];
@@ -136,7 +170,7 @@ void test(void)
 	for(i = 0; i < nbemp; i++) {
 		printf("%d %d %d/%d/%d %d/%d/%d\n", temp[i]->cote, temp[i]->numlec, temp[i]->demprunt.jour, temp[i]->demprunt.mois, temp[i]->demprunt.annee, temp[i]->dretour.jour, temp[i]->dretour.mois, temp[i]->dretour.annee);
 	}
-	
+	printf("%d", compareDate(d1,d2));
 }
 
 

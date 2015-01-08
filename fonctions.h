@@ -5,6 +5,18 @@
 #define TLONGCH 100
 
 typedef struct {
+	int numlec;
+	int cote;
+	Date demprunt;
+	Date dretour;
+}Emprunts;
+
+typedef struct maillon {
+	Emprunts a;
+	struct maillon *suivant;
+}Maillon, *Liste;
+
+typedef struct {
 	int jour;
 	int mois;
 	int annee;
@@ -15,13 +27,6 @@ typedef struct {
 	char titre[TAILLECH];
 	char categ[TAILLECH];
 }Ouvrage;
-
-typedef struct {
-	int numlec;
-	int cote;
-	Date demprunt;
-	Date dretour;
-}Emprunts;
 
 typedef struct {
 	int num;
