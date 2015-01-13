@@ -97,18 +97,22 @@ int chargeEmprunts (Lecteur * t[], int nb, char * nom)
 	fe = fopen(nom, "r");
 	if(fe == NULL)
 		return -1;
-	
+	printf("Lecture des emprunts\n");
 	emprunt = lireEmprunt(fe);
 	
 /*#magie*/ 
 
 	while(feof(fe) == 0)
 	{
+		printf("Boucle\n");
 		pos = rechercheLecteur(emprunt->numlec, t, nb);
+		printf("%d\n", pos);
 		if ( pos < 0) 
 			printf("l'utilisateur %d n'existe pas!", emprunt->numlec);
 		else 
-			insertionEmprunt(t[pos]->emps, *emprunt);
+			t[pos]->emps = insertionEmprunt(t[pos]->emps, emprunt);
+
+		printf("%d\n", t[pos]->emps->e->cote);
 
 		emprunt = lireEmprunt(fe);
 	}
@@ -129,12 +133,13 @@ int rechercheLecteur (int numrech, Lecteur *t[], int nb) //tableau pas trié, pe
 
 
 
-Liste insertionEnTete(Liste l, Emprunts e)
+Liste insertionEnTete(Liste l, Emprunts *e)
 {
 	Maillon *x;
-	x=(Maillon*)malloc(sizeof(Maillon));
-	x->e=e;
-	x->suivant=l;
+	x=(Maillon *)malloc(sizeof(Maillon));
+	x->e = e;
+	printf("%d\n", e->cote);
+	x->suivant = l;
 	return x;
 }
 
@@ -162,12 +167,15 @@ int compareDate(Date d1, Date d2)
 	}
 }
 
-Liste insertionEmprunt (Liste l, Emprunts e) 
+Liste insertionEmprunt (Liste l, Emprunts *e) 
 {
+	printf("Insertion\n");
 	if (l == NULL) 
 		return insertionEnTete(l, e); 
-	if (compareDate(l->e.demprunt, e.demprunt) > 0)
+
+	if (compareDate(l->e->demprunt, e->demprunt) > 0)
 		return insertionEnTete(l, e);
+
 	l->suivant = insertionEmprunt(l->suivant, e);
 	return l;
 }
@@ -183,7 +191,7 @@ void test(void)
 	Lecteur * tlec[100];
 	Emprunts * temp[100];
 	int nbouvr, nblec, nbemp;
-	int i;
+	int i, pos;
 	
 	nbouvr = chargeOuvrages(touvr, 100, "ouvrage.dat");
 	
@@ -192,17 +200,21 @@ void test(void)
 	}
 	
 	nblec = chargeLecteurs(tlec, 100, "lecteur.dat");
-	
+	printf("%d", nblec);
+
 	for(i = 0; i < nblec; i++) {
+		
 		printf("%d %s %s %s\n", tlec[i]->num, tlec[i]->nom, tlec[i]->prenom, tlec[i]->adresse);
+		printf("%d\n", i);
 	}
+
+	printf("Fonction charger emprunts\n");
+
+	chargeEmprunts(tlec, nblec, "emprunt.dat");
 	
-	nbemp = chargeEmprunts(temp, 100, "emprunt.dat");
-	
-	for(i = 0; i < nbemp; i++) {
-		printf("%d %d %d/%d/%d %d/%d/%d\n", temp[i]->cote, temp[i]->numlec, temp[i]->demprunt.jour, temp[i]->demprunt.mois, temp[i]->demprunt.annee, temp[i]->dretour.jour, temp[i]->dretour.mois, temp[i]->dretour.annee);
-	}
-	printf("%d", compareDate(d1,d2));
+	//printf("%d\n", tlec[0]->emps->e->cote);
+
+	//printf("%d\n", compareDate(d1,d2));
 }
 
 

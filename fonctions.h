@@ -18,7 +18,7 @@ typedef struct {
 }Emprunts;
 
 typedef struct maillon {
-	Emprunts e;
+	Emprunts *e;
 	struct maillon *suivant;
 }Maillon, *Liste;
 
@@ -36,14 +36,14 @@ typedef struct {
 	Liste emps;
 }Lecteur;
 
-
+Liste insertionEmprunt (Liste l, Emprunts *e);
 Lecteur * lireLecteur (FILE *fe);
 Emprunts * lireEmprunt (FILE *fe);
 Ouvrage * lireOuvrage(FILE *fe);
 int chargeOuvrages(Ouvrage * t[], int nbmax, char * nom);
 int chargeLecteurs(Lecteur * t[], int nbmax, char * nom);
-int chargeEmprunts(Emprunts * t[], int nbmax, char * nom);
-Liste insertionEnTete(Liste l, Emprunts e);
+int chargeEmprunts(Lecteur * t[], int nb, char * nom);
+Liste insertionEnTete(Liste l, Emprunts *e);
 int compareDate(Date d1, Date d2);
 
 void test(void);
