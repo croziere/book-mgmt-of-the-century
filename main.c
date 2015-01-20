@@ -1,15 +1,7 @@
-#include "fonctions.h"
+#include "global.h"
 
-int main(int argc, char * argv[])
+int main(void)
 {
-	if(argc > 1)
-	{
-		test();
-	}
-	else
-	{
-		printf("Bientôt le programme fonctionnera\n");
-	}	
-	
+	globale();
 	return 0;
 }
