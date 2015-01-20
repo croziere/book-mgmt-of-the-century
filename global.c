@@ -173,7 +173,7 @@ void initialiser(Ouvrage **touvr, Lecteur **tlec, Emprunts **temp, int *nbouvr, 
 	}
 	else //On demande si il veut commencer avec des données vides ou importer
 	{
-		printf("Pas de sauvegarde présente, voulez vous commencer avec une bibliothèque vide (O/n) ? ");
+		printf("Pas de sauvegarde présente, voulez vous commencer avec une bibliothèque vide (o) ou importer les fichiers (n) ? ");
 
 		scanf("%c%*c", &choix);
 		if(choix == 'O' || choix == 'o')
@@ -315,7 +315,8 @@ void menu (void)
 		printf("7 -> Historique des emprunt\n");
 		printf("8 -> Enregistrer un nouvel emprunt\n");
 		printf("9 -> Enregistrer un retour d'ouvrages\n");
-		printf("10 -> Surpriiise!\n");
+		printf("10 -> Ajouter un ouvrage\n");
+		printf("11 -> Surpriiise!\n");
 		printf("\n");
 		printf("0 -> quitter le programme.\n");
 }
@@ -359,6 +360,8 @@ void globale (void)
 		if (choix == 9)
 			pageRetourOuvrage(tlec, nblec, temp, &nbemp, touvr, nbouvr);
 		if (choix == 10)
+			pageAjouterOuvrage(touvr, &nbouvr);
+		if (choix == 11)
 			welcomeChezUs();
 
 		menu();

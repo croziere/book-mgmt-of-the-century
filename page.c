@@ -278,7 +278,7 @@ void pageNouvelEmprunt(Ouvrage** touvr, int nbouvr, Lecteur** tlec, int nblec)
 	afficherUnOuvrage(*touvr[posouvr], tlec, nblec);
 	printf("\nVoulez-vous ajouter l'emprunt suivant (O/N) ? ");
 
-	scanf("%c%*c", &choix);
+	scanf("%c", &choix);
 	purger(&choix);
 	if (choix == 'O' || choix == 'o')
 	{
@@ -383,6 +383,80 @@ void pageRetourOuvrage(Lecteur** tlec, int nblec, Emprunts** temp, int *nbemp, O
 
 	printf("Le retour de l'ouvrage (%d) %s a bien été enregistré\n", touvr[posouvr]->cote, touvr[posouvr]->titre);
 
+
+	printf("\nAppuyez sur Entrée pour revenir au menu");
+	getchar();
+	system("clear");
+}
+
+void pageAjouterOuvrage(Ouvrage** touvr, int *nbouvr)
+{
+	int cote, posouvr;
+	char titre[TLONGCH], categ[TLONGCH], c;
+	Ouvrage* o; 
+
+	system("clear");
+	printf("---------- Ajout d'ouvrage ----------\n");
+	printf("\nNouvelle cote de l'ouvrage (-1 retour) : ");
+	saisirUnEntier(&cote);
+	if (cote == -1)
+		return;
+	posouvr = rechercheOuvrage(cote, touvr, *nbouvr);
+	while(posouvr >= 0)
+	{
+		printf("L'ouvrage %d existe déjà (%s)\n", cote, touvr[posouvr]->titre);
+		printf("\nNouvelle cote de l'ouvrage (-1 retour) : ");
+		saisirUnEntier(&cote);
+		if (cote == -1)
+			return;
+		posouvr = rechercheOuvrage(cote, touvr, *nbouvr);	
+	}
+
+	printf("Titre de l'ouvrage : ");
+	fgets(titre, TLONGCH, stdin);
+	purger(titre);
+	printf("Catégorie : ");
+	fgets(categ, TLONGCH, stdin);
+	purger(categ);
+
+	o = (Ouvrage *)malloc(sizeof(Ouvrage));
+	if(o == NULL)
+	{
+		printf("Erreur d'allocation\n");
+		return;
+	}
+
+	o->cote = cote;
+	strcpy(o->titre, titre);
+	strcpy(o->categ, categ);
+
+	printf("Votre ouvrage : %d - %s - %s\n", o->cote, o->titre, o->categ);
+
+	printf("Confirmez vous l'ajout ? (O/n) \n");
+
+	scanf("%c", &c);
+	purger(&c);
+
+	if(c == 'o' || c == 'O')
+	{
+		if(*nbouvr == TMAXTAB)
+		{
+			printf("Tableau trop petit\n");
+			getchar();
+			return;
+		}
+
+		touvr[*nbouvr] = o;
+		*nbouvr = *nbouvr + 1;
+
+		printf("Ajout de (%d) %s réussi !\n", o->cote, o->titre);
+
+	}
+	else
+	{
+		printf("Annulation\n");
+		free(o);
+	}
 
 	printf("\nAppuyez sur Entrée pour revenir au menu");
 	getchar();
